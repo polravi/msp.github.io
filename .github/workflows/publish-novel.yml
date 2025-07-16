@@ -1,0 +1,54 @@
+name: Publish Novel to GitHub Pages
+
+on:
+  workflow_dispatch:    # Allows manual triggering
+  push:
+    branches:
+      - main
+    paths:
+      - 'Novel.md'
+      - 'box.png'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          npm install -g markdown-it
+          npm install -g markdown-it-cli
+          npm install -g markdown-it-attrs
+
+      - name: Convert Markdown to HTML
+        run: |
+          echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Man & the blackhole</title><style>body{max-width:800px;margin:40px auto;padding:0 20px;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#333}img{max-width:100%;height:auto}</style></head><body>' > index.html
+          markdown-it Novel.md >> index.html
+          echo '</body></html>' >> index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
