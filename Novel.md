@@ -1,6 +1,6 @@
 <span style="color:red;">This is private book, you cannot use this without copyright approval</span>
 
-<h1> Man & the blackhole </h1>
+<h1> Man & the Blackhole </h1>
 
 #### Chapter 1: The Box
 ![alt box](box.png)
