@@ -1,4 +1,4 @@
-<span style="color:red;">This is private book, you cannot use this without copyright approval</span>
+<span style="color:red;">This is a private book, you cannot use this without copyright approval.</span>
 
 <h1> Man & the Blackhole </h1>
 
